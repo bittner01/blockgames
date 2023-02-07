@@ -20,6 +20,8 @@ const brickOffsetLeft = 30;
 const brickColumnCount2 = 6;
 const brickRowCount2 = 5;
 let brickCount = 0;
+let brickCount2 = 0;
+let brickCount3 = 0;
 let score = 0;
 let lives = 3;
 let level = 0;
@@ -75,14 +77,25 @@ function collisionDetection() {
                     dy + -dy;
                     b.status = 0;
                     score++;
-                
-                    if (score === brickRowCount * brickColumnCount) {
+                    
+                        if (score === brickRowCount * brickColumnCount) {
                     // alert('YOU WIN, HAVE A GREAT DAY!');
-                    document.location.reload(draw2);
-                
-                    }else if(score === brickRowCount * brickColumnCount){
-                        document.location.reload(draw3);
-                        }
+                        document.location.reload;}
+
+                       
+                        if (draw){ 
+                            score <= 2525
+                            return draw2
+                            document.location.reload
+                        };
+                        
+                        if (draw2){ 
+                            score <= 5050
+                            return draw3
+                            document.location.reload
+                        };
+                            
+                    
                 }
             }
         }
@@ -176,6 +189,8 @@ function drawLevel() {
     ctx.fillText(`Level: ${level}`, 100, 20);
 
 }
+Levels = [draw, draw2, draw3] 
+
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -199,12 +214,9 @@ function draw() {
         }
         else {
             lives--;
-
+        
             if (score === brickRowCount * brickColumnCount) {
-                
-            }
-            if (score === 2500) {
-                return draw2;
+                return(draw2)
             }
             if (!lives) {
                 alert('GAME OVER');
@@ -217,6 +229,7 @@ function draw() {
                 dx = 3;
                 dy = -3;
                 paddleX = (canvas.width - paddleWidth) / 2;
+    
             }
         }
     }
@@ -229,7 +242,7 @@ function draw() {
     }
     x += dx;
     y += dy;
-    requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
 }
 
 function draw2() {
@@ -239,7 +252,7 @@ function draw2() {
     drawPaddle();
     drawScore();
     drawLives();
-    drawLevel(2);
+    drawLevel();
     collisionDetection();
 
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -255,22 +268,21 @@ function draw2() {
         else {
             lives--;
 
-
-            if (score === brickRowCount2 * brickColumnCount2) {
-                return;
-            }
-
             if (!lives) {
                 alert('GAME OVER1');
                 document.location.reload();
-
             }
+                if (score === brickRowCount2 * brickColumnCount2) {
+                    return;
+                }
+            
             else {
                 x = canvas.width / 2;
                 y = canvas.height - 30;
                 dx = 3;
                 dy = -3;
                 paddleX = (canvas.width - paddleWidth) / 2;
+  
             }
         }
     }
@@ -283,7 +295,7 @@ function draw2() {
     }
     x += dx;
     y += dy;
-    requestAnimationFrame(draw2);
+             requestAnimationFrame(draw2);
 }
 function draw3() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -292,7 +304,7 @@ function draw3() {
     drawPaddle();
     drawScore();
     drawLives();
-    drawLevel(3);
+    drawLevel();
     collisionDetection();
 
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -307,7 +319,6 @@ function draw3() {
         }
         else {
             lives--;
-
 
             if (score === brickRowCount2 * brickColumnCount2) {
                 return;
@@ -324,6 +335,8 @@ function draw3() {
                 dx = 3;
                 dy = -3;
                 paddleX = (canvas.width - paddleWidth) / 2;
+                
+            
             }
         }
     }
@@ -338,6 +351,7 @@ function draw3() {
     y += dy;
     requestAnimationFrame(draw3);
 }
+
 draw();
 draw2();
 draw3();
